@@ -1,14 +1,32 @@
 {
     "name": "pantheon-systems/example-drops-8-composer",
-    "description": "Install drops-8 with Composer on Pantheon.",
+    "description": "Install drops-8 Commerce 2.x template drugan project-base with Composer on Pantheon.",
     "type": "project",
     "license": "MIT",
-    "repositories": [
+    "authors": [
         {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
+            "name": "",
+            "role": ""
         }
     ],
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "commerce_base": {
+            "type": "vcs",
+            "url": "https://github.com/drugan/commerce_base"
+        },
+        "commerce": {
+            "type": "vcs",
+            "url": "https://github.com/drugan/commerce"
+        },
+        "commerce_multistore": {
+            "type": "vcs",
+            "url": "https://github.com/drugan/commerce_multistore"
+        }
+    },
     "require": {
         "php": ">=7.0.8",
         "composer/installers": "^1.0.20",
@@ -23,7 +41,18 @@
         "rvtraveller/qs-composer-installer": "^1.1",
         "drush-ops/behat-drush-endpoint": "^0.0.5",
         "pantheon-systems/quicksilver-pushback": "~1",
-        "webflo/drupal-core-strict": "^8"
+        "webflo/drupal-core-strict": "^8",
+
+        "ext-curl": "*",
+        "drupal/admin_toolbar": "~1.0",
+        "drupal/commerce": "dev-8.4-2.x",
+        "drupal/search_api": "~1.0",
+        "drupal/swiftmailer": "~1.0",
+        "drupalcommerce/commerce_base": "dev-8.x-1.x",
+        "webflo/drupal-finder": "^0.3.0",
+        "webmozart/path-util": "^2.3",
+        "drupal/color_field": "2.x-dev"
+
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.2",
@@ -35,12 +64,16 @@
         "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
         "drupal/drupal-extension": "^3.1",
         "phpunit/phpunit": "^4.8",
-        "symfony/css-selector": "^2.8"
+        "symfony/css-selector": "^2.8",
+
+        "drupal/devel": "1.x-dev"
     },
     "conflict": {
             "drupal/drupal": "*"
     },
-    "minimum-stability": "alpha",
+
+    "minimum-stability": "dev",
+    
     "prefer-stable": true,
     "autoload": {
         "classmap": [
@@ -57,6 +90,15 @@
         "unit-test": "echo 'No unit test step defined.'",
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
+
+        "pre-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+
+
         "post-install-cmd": [
             "@drupal-scaffold",
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
@@ -74,6 +116,23 @@
     "extra": {
         "installer-paths": {
             "web/core": ["type:drupal-core"],
+
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/commerce_core_modules/{$name}": [
+                "drupal/address",
+                "drupal/commerce",
+                "drupal/entity",
+                "drupal/entity_reference_revisions",
+                "drupal/inline_entity_form",
+                "drupal/mailsystem",
+                "drupal/profile",
+                "drupal/search_api",
+                "drupal/state_machine",
+                "drupal/swiftmailer"
+            ],
+            
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
@@ -109,6 +168,8 @@
         "sort-packages": true,
         "platform": {
             "php": "7.0.8"
-        }
+        },
+
+        "bin-dir": "bin"
     }
 }
