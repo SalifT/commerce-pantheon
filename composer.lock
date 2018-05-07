@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c83a93506582a08947c64ec01d6a58ae",
+    "content-hash": "c91c0801c27dda65b30c3fc9d97a7093",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6941,7 +6941,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2018-04-21T14:58:42+00:00"
         },
         {
             "name": "drupal/drupal-driver",
