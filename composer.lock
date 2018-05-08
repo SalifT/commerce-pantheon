@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c91c0801c27dda65b30c3fc9d97a7093",
+    "content-hash": "55ccc1a04408916f6d7c568eb6ed4560",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1417,13 +1417,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/drugan/commerce_multistore.git",
-                "reference": "f712ff54be465f1588cdd26d5419af32a93c462b"
+                "url": "https://github.com/SalifT/commerce_multistore.git",
+                "reference": "eaaf7ddfa30101e33a031b9c77dd10057d1f70ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drugan/commerce_multistore/zipball/f712ff54be465f1588cdd26d5419af32a93c462b",
-                "reference": "f712ff54be465f1588cdd26d5419af32a93c462b",
+                "url": "https://api.github.com/repos/SalifT/commerce_multistore/zipball/eaaf7ddfa30101e33a031b9c77dd10057d1f70ce",
+                "reference": "eaaf7ddfa30101e33a031b9c77dd10057d1f70ce",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -1439,7 +1439,7 @@
                 "issues": "https://github.com/drugan/commerce_multistore/issues",
                 "source": "https://github.com/drugan/commerce_multistore"
             },
-            "time": "2018-01-19T10:59:26+00:00"
+            "time": "2018-05-08T21:56:09+00:00"
         },
         {
             "name": "drupal/config_direct_save",

@@ -24,7 +24,7 @@
         },
         "commerce_multistore": {
             "type": "vcs",
-            "url": "https://github.com/drugan/commerce_multistore"
+            "url": "https://github.com/SalifT/commerce_multistore"
         }
     },
     "require": {
