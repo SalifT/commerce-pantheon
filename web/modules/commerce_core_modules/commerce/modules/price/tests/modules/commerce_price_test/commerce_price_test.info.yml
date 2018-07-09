@@ -1,8 +1,13 @@
 name: Commerce Price Test
 type: module
 package: Testing
-core: 8.x
+# core: 8.x
 dependencies:
-  - commerce_store
-  - commerce_multistore
-  - commerce_price
+  - commerce:commerce_store
+  - commerce:commerce_price
+
+# Information added by Drupal.org packaging script on 2018-05-28
+version: '8.x-2.7'
+core: '8.x'
+project: 'commerce'
+datestamp: 1527529099

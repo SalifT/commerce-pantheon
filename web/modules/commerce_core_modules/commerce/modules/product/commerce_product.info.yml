@@ -2,13 +2,13 @@ name: Commerce Product
 type: module
 description: 'Defines the Product entity and associated features.'
 package: Commerce
-core: 8.x
+# core: 8.x
 dependencies:
-  - commerce
+  - commerce:commerce
   - commerce:commerce_price
   - commerce:commerce_store
-  - path
-  - text
+  - drupal:path
+  - drupal:text
 config_devel:
   install:
     - commerce_product.commerce_product_type.default
@@ -33,3 +33,9 @@ config_devel:
     - core.entity_view_display.commerce_order_item.product_variation.default
     - core.entity_view_display.commerce_product_variation.default.cart
     - core.entity_view_mode.commerce_product_variation.cart
+
+# Information added by Drupal.org packaging script on 2018-05-28
+version: '8.x-2.7'
+core: '8.x'
+project: 'commerce'
+datestamp: 1527529099

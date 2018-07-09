@@ -2,16 +2,19 @@
 
 namespace Drupal\commerce_payment\Plugin\Commerce\CheckoutPane;
 
-use Drupal\commerce\Response\NeedsRedirectException;
+use Drupal\commerce_checkout\Plugin\Commerce\CheckoutFlow\CheckoutFlowInterface;
 use Drupal\commerce_checkout\Plugin\Commerce\CheckoutPane\CheckoutPaneBase;
 use Drupal\commerce_payment\Exception\DeclineException;
 use Drupal\commerce_payment\Exception\PaymentGatewayException;
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\ManualPaymentGatewayInterface;
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OffsitePaymentGatewayInterface;
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\OnsitePaymentGatewayInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the payment process pane.
@@ -24,6 +27,49 @@ use Drupal\Core\Url;
  * )
  */
 class PaymentProcess extends CheckoutPaneBase {
+
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs a new PaymentProcess object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\commerce_checkout\Plugin\Commerce\CheckoutFlow\CheckoutFlowInterface $checkout_flow
+   *   The parent checkout flow.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CheckoutFlowInterface $checkout_flow, EntityTypeManagerInterface $entity_type_manager, MessengerInterface $messenger) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $checkout_flow, $entity_type_manager);
+
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, CheckoutFlowInterface $checkout_flow = NULL) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $checkout_flow,
+      $container->get('entity_type.manager'),
+      $container->get('messenger')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -83,9 +129,17 @@ class PaymentProcess extends CheckoutPaneBase {
    * {@inheritdoc}
    */
   public function isVisible() {
-    // This pane can't be used without the PaymentInformation pane.
+    if ($this->order->getTotalPrice()->isZero()) {
+      // Hide the pane for free orders, since they don't need a payment.
+      return FALSE;
+    }
     $payment_info_pane = $this->checkoutFlow->getPane('payment_information');
-    return $payment_info_pane->isVisible() && $payment_info_pane->getStepId() != '_disabled';
+    if (!$payment_info_pane->isVisible() || $payment_info_pane->getStepId() == '_disabled') {
+      // Hide the pane if the PaymentInformation pane has been disabled.
+      return FALSE;
+    }
+
+    return TRUE;
   }
 
   /**
@@ -94,7 +148,7 @@ class PaymentProcess extends CheckoutPaneBase {
   public function buildPaneForm(array $pane_form, FormStateInterface $form_state, array &$complete_form) {
     // The payment gateway is currently always required to be set.
     if ($this->order->get('payment_gateway')->isEmpty()) {
-      drupal_set_message($this->t('No payment gateway selected.'), 'error');
+      $this->messenger->addError($this->t('No payment gateway selected.'));
       $this->redirectToPreviousStep();
     }
 
@@ -120,13 +174,13 @@ class PaymentProcess extends CheckoutPaneBase {
       }
       catch (DeclineException $e) {
         $message = $this->t('We encountered an error processing your payment method. Please verify your details and try again.');
-        drupal_set_message($message, 'error');
+        $this->messenger->addError($message);
         $this->redirectToPreviousStep();
       }
       catch (PaymentGatewayException $e) {
         \Drupal::logger('commerce_payment')->error($e->getMessage());
         $message = $this->t('We encountered an unexpected error processing your payment method. Please try again later.');
-        drupal_set_message($message, 'error');
+        $this->messenger->addError($message);
         $this->redirectToPreviousStep();
       }
     }
@@ -145,8 +199,8 @@ class PaymentProcess extends CheckoutPaneBase {
       $complete_form['actions']['next']['#value'] = $this->t('Proceed to @gateway', [
         '@gateway' => $payment_gateway_plugin->getDisplayLabel(),
       ]);
-      // The 'Go back' link needs to use the cancel URL to ensure that the
-      // order is unlocked when the customer is sent to the previous page.
+      // Make sure that the payment gateway's onCancel() method is invoked,
+      // by pointing the "Go back" link to the cancel URL.
       $complete_form['actions']['next']['#suffix'] = Link::fromTextAndUrl($this->t('Go back'), $this->buildCancelUrl())->toString();
       // Hide the actions by default, they are not needed by gateways that
       // embed iframes or redirect via GET. The offsite-payment form can
@@ -163,7 +217,7 @@ class PaymentProcess extends CheckoutPaneBase {
       catch (PaymentGatewayException $e) {
         \Drupal::logger('commerce_payment')->error($e->getMessage());
         $message = $this->t('We encountered an unexpected error processing your payment. Please try again later.');
-        drupal_set_message($message, 'error');
+        $this->messenger->addError($message);
         $this->redirectToPreviousStep();
       }
     }
@@ -217,7 +271,8 @@ class PaymentProcess extends CheckoutPaneBase {
    * @throws \Drupal\commerce\Response\NeedsRedirectException
    */
   protected function redirectToPreviousStep() {
-    throw new NeedsRedirectException($this->buildPaymentInformationStepUrl()->toString());
+    $step_id = $this->checkoutFlow->getPane('payment_information')->getStepId();
+    return $this->checkoutFlow->redirectToStep($step_id);
   }
 
 }
