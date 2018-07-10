@@ -358,7 +358,8 @@ class OrderItem extends CommerceContentEntityBase implements OrderItemInterface 
         'type' => 'timestamp',
         'weight' => 0,
       ])
-      ->setDisplayConfigurable('form', TRUE);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
@@ -386,7 +387,7 @@ class OrderItem extends CommerceContentEntityBase implements OrderItemInterface 
       // hidden instead. https://www.drupal.org/node/2346347#comment-10254087.
       $fields['purchased_entity']->setRequired(FALSE);
       $fields['purchased_entity']->setDisplayOptions('form', [
-        'type' => 'hidden',
+        'region' => 'hidden',
       ]);
       $fields['purchased_entity']->setDisplayConfigurable('form', FALSE);
       $fields['purchased_entity']->setDisplayConfigurable('view', FALSE);

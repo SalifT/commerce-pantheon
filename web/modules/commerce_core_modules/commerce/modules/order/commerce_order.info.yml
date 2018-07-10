@@ -2,15 +2,15 @@ name: Commerce Order
 type: module
 description: 'Defines the Order entity and associated features.'
 package: Commerce
-core: 8.x
+# core: 8.x
 dependencies:
-  - commerce
+  - commerce:commerce
   - commerce:commerce_price
   - commerce:commerce_store
-  - entity_reference_revisions
-  - options
-  - profile
-  - state_machine
+  - entity_reference_revisions:entity_reference_revisions
+  - profile:profile
+  - state_machine:state_machine
+  - drupal:options
 config_devel:
   install:
     - commerce_order.commerce_order_type.default
@@ -27,3 +27,9 @@ config_devel:
     - views.view.commerce_user_orders
     - profile.type.customer
     - system.action.commerce_delete_order_action
+
+# Information added by Drupal.org packaging script on 2018-05-28
+version: '8.x-2.7'
+core: '8.x'
+project: 'commerce'
+datestamp: 1527529099

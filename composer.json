@@ -16,45 +16,46 @@
         },
         "commerce_base": {
             "type": "vcs",
-            "url": "https://github.com/drugan/commerce_base"
+            "url": "https://github.com/drupalcommerce/commerce_base"
         },
-        "commerce": {
+        "commerce_marketplace": {
             "type": "vcs",
-            "url": "https://github.com/drugan/commerce"
+            "url": "https://github.com/drugan/commerce_marketplace"
         },
-        "commerce_multistore": {
-            "type": "vcs",
-            "url": "https://github.com/SalifT/commerce_multistore"
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     },
     "require": {
         "php": ">=7.0.8",
-        "composer/installers": "^1.0.20",
-        "cweagans/composer-patches": "^1.0",
-        "drupal-composer/drupal-scaffold": "^2.0.1",
+        "ext-curl": "*",
+        "bower-asset/jquery-simple-color": "^1.2",
+        "bower-asset/spectrum": "^1.8",
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6",
+        "drupal-composer/drupal-scaffold": "dev-test-manual-loader",
+        "drupal/admin_toolbar": "~1.0",
+        "drupal/color_field": "2.x-dev",
+        "drupal/commerce": "~2.0",
+        "drupal/commerce_marketplace": "8.x-1.x-dev",
         "drupal/config_direct_save": "^1.0",
         "drupal/config_installer": "^1.0",
         "drupal/console": "^1",
-        "drupal/core": "^8",
-        "drupal/simple_block": "^1.0@beta",
-        "drush/drush": "~8",
-        "rvtraveller/qs-composer-installer": "^1.1",
-        "drush-ops/behat-drush-endpoint": "^0.0.5",
-        "pantheon-systems/quicksilver-pushback": "~1",
-        "webflo/drupal-core-strict": "^8",
-
-        "ext-curl": "*",
-        "drupal/admin_toolbar": "~1.0",
-        "drupal/commerce": "dev-8.4-2.x",
+        "drupal/core": "~8.5",
         "drupal/search_api": "~1.0",
+        "drupal/simple_block": "^1.0@beta",
         "drupal/swiftmailer": "~1.0",
+        "drupal/token": "~1.0",
         "drupalcommerce/commerce_base": "dev-8.x-1.x",
-        "webflo/drupal-finder": "^0.3.0",
-        "webmozart/path-util": "^2.3",
-        "drupal/color_field": "2.x-dev",
-        "drupal/commerce_multistore": "*"
-
-
+        "drush-ops/behat-drush-endpoint": "^0.0.5",
+        "drush/drush": "~8",
+        "oomphinc/composer-installers-extender": "^1.1",
+        "pantheon-systems/quicksilver-pushback": "~1",
+        "rvtraveller/qs-composer-installer": "^1.1",
+        "webflo/drupal-core-strict": "^8",
+        "webflo/drupal-finder": "^1.0",
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.2",
@@ -66,16 +67,14 @@
         "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
         "drupal/drupal-extension": "^3.1",
         "phpunit/phpunit": "^4.8",
-        "symfony/css-selector": "^2.8",
-
+        "symfony/css-selector": "^3.4.0",
+        "webflo/drupal-core-require-dev": "~8.5",
         "drupal/devel": "1.x-dev"
     },
     "conflict": {
             "drupal/drupal": "*"
     },
-
-    "minimum-stability": "dev",
-    
+    "minimum-stability": "dev",    
     "prefer-stable": true,
     "autoload": {
         "classmap": [
@@ -92,15 +91,12 @@
         "unit-test": "echo 'No unit test step defined.'",
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
-
         "pre-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "pre-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
-
-
         "post-install-cmd": [
             "@drupal-scaffold",
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
@@ -116,11 +112,13 @@
         ]
     },
     "extra": {
+        "installer-types": ["library"],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-
             "web/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
             ],
             "web/modules/commerce_core_modules/{$name}": [
                 "drupal/address",
@@ -134,11 +132,12 @@
                 "drupal/state_machine",
                 "drupal/swiftmailer"
             ],
-            
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/contrib/{$name}": ["type:drupal-drush"]
+            "drush/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "build-env": {
             "install-cms": [
@@ -171,7 +170,6 @@
         "platform": {
             "php": "7.0.8"
         },
-
         "bin-dir": "bin"
     }
 }
