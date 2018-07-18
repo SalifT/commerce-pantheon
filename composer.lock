@@ -1405,10 +1405,13 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/color_field",
-                "reference": "b9ffa9032f997fd982d0c7692746e15da947c703"
+                "reference": "ddce0a3a748e438e394ae64913e59e9f50d3f4fd"
             },
             "require": {
                 "drupal/core": "*"
+            },
+            "require-dev": {
+                "drupal/token": "~1.3"
             },
             "suggest": {
                 "bower-asset/jquery-simple-color": "^v1.2.2: Provides JavaScript library necessary for the Color Grid widget",
@@ -1420,8 +1423,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc3+1-dev",
-                    "datestamp": "1526582880",
+                    "version": "8.x-2.0-rc3+10-dev",
+                    "datestamp": "1531859921",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1450,27 +1453,27 @@
                 "source": "http://cgit.drupalcode.org/color_field",
                 "issues": "https://www.drupal.org/project/issues/color_field?version=8.x"
             },
-            "time": "2017-04-13T15:34:24+00:00"
+            "time": "2018-07-17T22:52:38+00:00"
         },
         {
             "name": "drupal/commerce",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/commerce",
-                "reference": "8.x-2.7"
+                "reference": "8.x-2.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.7.zip",
-                "reference": "8.x-2.7",
-                "shasum": "e1f5c30f4899913e7e1a8200e8f65b422e50d451"
+                "url": "https://ftp.drupal.org/files/projects/commerce-8.x-2.8.zip",
+                "reference": "8.x-2.8",
+                "shasum": "4313bc3e409081b27e05448803565e39270bb75a"
             },
             "require": {
                 "commerceguys/intl": "^1.0.0",
                 "drupal/address": "^1.4",
                 "drupal/core": "~8.5",
-                "drupal/entity": "^1.0-beta3",
+                "drupal/entity": "^1.0-beta4",
                 "drupal/entity_reference_revisions": "~1.0",
                 "drupal/inline_entity_form": "^1.0-rc1",
                 "drupal/profile": "~1.0",
@@ -1493,8 +1496,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.7",
-                    "datestamp": "1527530416",
+                    "version": "8.x-2.8",
+                    "datestamp": "1531924052",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3448,16 +3451,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "35b8caf75e791ba1b2d24fec1552168d72692b12"
+                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/35b8caf75e791ba1b2d24fec1552168d72692b12",
-                "reference": "35b8caf75e791ba1b2d24fec1552168d72692b12",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
                 "shasum": ""
             },
             "require": {
@@ -3495,7 +3498,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-06-03T11:33:10+00:00"
+            "time": "2018-07-15T17:25:16+00:00"
         },
         {
             "name": "oomphinc/composer-installers-extender",
@@ -6793,7 +6796,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/devel",
-                "reference": "14f4d531be5ae12a29072d2cf532f4e09cd61c9f"
+                "reference": "74e53a7075b329c2e0fe8636f58e09981663e9cc"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -6807,8 +6810,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.2+20-dev",
-                    "datestamp": "1530615524",
+                    "version": "8.x-1.2+21-dev",
+                    "datestamp": "1530615824",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -6866,7 +6869,8 @@
                 "source": "http://cgit.drupalcode.org/devel",
                 "issues": "http://drupal.org/project/devel",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
+            },
+            "time": "2018-07-17T07:39:42+00:00"
         },
         {
             "name": "drupal/drupal-driver",

@@ -12,8 +12,8 @@ dependencies:
   - views
   - system (>=8.5.0)
 
-# Information added by Drupal.org packaging script on 2018-05-28
-version: '8.x-2.7'
+# Information added by Drupal.org packaging script on 2018-07-17
+version: '8.x-2.8'
 core: '8.x'
 project: 'commerce'
-datestamp: 1527529099
+datestamp: 1531841628
