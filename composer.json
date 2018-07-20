@@ -25,6 +25,30 @@
         "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        "d3": {
+            "type": "package",
+            "package": {
+                "name": "d3/d3",
+                "version": "v3.5.17",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/d3/d3/archive/v3.5.17.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        "highlightjs": {
+            "type": "package",
+            "package": {
+                "name": "components/highlightjs",
+                "version": "9.7.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/components/highlightjs/archive/9.7.0.zip",
+                    "type": "zip"
+                }
+            }
         }
     },
     "require": {

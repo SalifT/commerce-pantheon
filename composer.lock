@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a754fcc9859cc47cdae61d161ba83aa7",
+    "content-hash": "66c57fa43b5327f284782530a188367c",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1405,7 +1405,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/color_field",
-                "reference": "ddce0a3a748e438e394ae64913e59e9f50d3f4fd"
+                "reference": "7d5cbe10ae1aceeec86663b166d0799761318502"
             },
             "require": {
                 "drupal/core": "*"
@@ -1423,8 +1423,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-rc3+10-dev",
-                    "datestamp": "1531859921",
+                    "version": "8.x-2.0-rc3+13-dev",
+                    "datestamp": "1531969684",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1453,7 +1453,7 @@
                 "source": "http://cgit.drupalcode.org/color_field",
                 "issues": "https://www.drupal.org/project/issues/color_field?version=8.x"
             },
-            "time": "2018-07-17T22:52:38+00:00"
+            "time": "2018-07-19T18:39:44+00:00"
         },
         {
             "name": "drupal/commerce",
@@ -2462,20 +2462,20 @@
         },
         {
             "name": "drupal/search_api",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/search_api",
-                "reference": "8.x-1.8"
+                "reference": "8.x-1.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "04d7b3b680e84aad086a61fb9eb4ffe77dc278e4"
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.9.zip",
+                "reference": "8.x-1.9",
+                "shasum": "b019b3af9e724a1804b540ae0e4a56d2ee98c603"
             },
             "require": {
-                "drupal/core": "^8.4"
+                "drupal/core": "^8.5"
             },
             "require-dev": {
                 "drupal/search_api_autocomplete": "@dev",
@@ -2487,8 +2487,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1523872384",
+                    "version": "8.x-1.9",
+                    "datestamp": "1531985581",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
