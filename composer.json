@@ -22,6 +22,19 @@
             "type": "vcs",
             "url": "https://github.com/drugan/commerce_marketplace"
         },
+        "commerce_store_gateways": {
+            "type": "package",
+            "package": {
+                "name": "drupal/commerce_store_gateways",
+                "version": "8.1",
+                "type": "drupal-module",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:bojanz/commerce_store_gateways.git",
+                    "reference": "8.x-1.x"
+                }
+            }
+        },
         "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
@@ -63,6 +76,7 @@
         "drupal/color_field": "2.x-dev",
         "drupal/commerce": "~2.0",
         "drupal/commerce_marketplace": "8.x-1.x-dev",
+        "drupal/commerce_store_gateways": "~8.0",
         "drupal/config_direct_save": "^1.0",
         "drupal/config_installer": "^1.0",
         "drupal/console": "^1",
@@ -98,7 +112,7 @@
     "conflict": {
             "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",    
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "classmap": [
@@ -163,6 +177,12 @@
             "web/modules/custom/{$name}": ["type:drupal-custom-module"],
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
+        "enable-patching": true,
+        "patches": {
+            "drupal/composer": {
+                "fix:Method DrupalProject composer ScriptHandler::checkComposerVersion is not callable": "https://www.drupal.org/files/issues/2933959-4-scripthandler-update.patch"
+            }
+          },
         "build-env": {
             "install-cms": [
                 "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes",
